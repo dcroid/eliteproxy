@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.andreyteterevkov.p006_eliteproxy.MainActivity">
+        <activity android:name="eliteproxy_biz.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,11 +18,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.andreyteterevkov.p006_eliteproxy.SettingsActivity"
-            android:parentActivityName="com.example.andreyteterevkov.p006_eliteproxy.MainActivity">
+            android:name="eliteproxy_biz.SettingsActivity"
+            android:parentActivityName="eliteproxy_biz.MainActivity">
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.example.andreyteterevkov.p006_eliteproxy.MainActivity"></meta-data>
+                    android:value="eliteproxy_biz.MainActivity"></meta-data>
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.andreyteterevkov.p006_eliteproxy;
+package eliteproxy_biz;
 
 
 import android.content.Context;
