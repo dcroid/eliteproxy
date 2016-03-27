@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Eliteproxy.biz</string>
+    <string name="upBtn">Обновить данные</string>
+
+    <string name="ip">IP: </string>
+    <string name="ip_result"></string>
+
+    <string name="expired">Expired: </string>
+    <string name="expired_result"></string>
+
+    <string name="concnt">Concnt: </string>
+    <string name="concnt_result"></string>
+
+
+    <string name="time_update">Time update: </string>
+    <string name="time_update_res"></string>
+
+    <string name="settingBtn">Обновить API KEY</string>
+
+
+    <string name="getActivityBtnSettings">API KEY</string>
+
+    <string name="errorMessage"></string>
+
+
+</resources>
