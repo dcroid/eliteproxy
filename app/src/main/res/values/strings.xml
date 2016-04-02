@@ -3,24 +3,33 @@
     <string name="upBtn">Обновить данные</string>
 
     <string name="ip">IP: </string>
-    <string name="ip_result"></string>
+    <string name="ip_result" />
 
     <string name="expired">Expired: </string>
-    <string name="expired_result"></string>
+    <string name="expired_result" />
 
     <string name="concnt">Concnt: </string>
-    <string name="concnt_result"></string>
+    <string name="concnt_result" />
 
 
     <string name="time_update">Time update: </string>
-    <string name="time_update_res"></string>
+    <string name="time_update_res" />
 
     <string name="settingBtn">Обновить API KEY</string>
 
 
     <string name="getActivityBtnSettings">API KEY</string>
 
-    <string name="errorMessage"></string>
+    <string name="errorMessage" />
+
+    <string name="editTextApiKey">Api key</string>
+    <string name="checkBoxNullThead">Отсутвие потоков</string>
+    <string name="checkBoxBigThead">Превышение кол-ва потоков</string>
+    <string name="TitleCheckBox">Уведомления</string>
+    <string name="TextChengeIP">IP</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -14,19 +14,22 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.andreyteterevkov.Service.MonitoringService;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.PointsGraphSeries;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import Main.R;
 
+import ApiRequest.Api;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        startService(new Intent(this, MonitoringService.class));
         loadApiKey();
+
+        setContentView(R.layout.activity_main);
+
         pb = (ProgressBar) findViewById(R.id.progressBar);
 
         Button apikey = (Button) findViewById(R.id.getActivityBtnSettings);
@@ -59,6 +65,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         new ParseTask().execute();
+
+
+//        GraphView graph = (GraphView) findViewById(R.id.graph);
+//        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{
+//                new DataPoint(0,100),
+//                new DataPoint(1,123),
+//                new DataPoint(2,143),
+//                new DataPoint(3,250),
+//                new DataPoint(4,189)
+//
+//        });
+//
+//        graph.addSeries(series);
+
+
     }
 
     public void onClickUpBtn(View view) {
@@ -67,36 +88,14 @@ public class MainActivity extends AppCompatActivity {
 
     private class ParseTask extends AsyncTask<Void, Void, String> {
 
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader = null;
         String resultJson = "";
-        String apiUrl = "http://eliteproxy.biz/api/access.php?apikey=";
-
         // Во время загрузки
         @Override
         protected String doInBackground(Void... params) {
-            // получаем данные с внешнего ресурса
+            Api api = new Api();
+
             try {
-//                URL url = new URL(apiUrl + "7d8348f0d483b48ee27f033900a34555");
-
-
-                Log.d(LOG_TAG, apiUrl + key_string);
-                URL url = new URL(apiUrl + key_string);
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.connect();
-
-                InputStream inputStream = urlConnection.getInputStream();
-                StringBuffer buffer = new StringBuffer();
-
-                reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line);
-                }
-
-                resultJson = buffer.toString();
+                resultJson = api.getDataResult(key_string);
 
             } catch (Exception e) {
                 e.printStackTrace();

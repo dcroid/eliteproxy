@@ -3,6 +3,7 @@
     package="Main">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -20,10 +21,15 @@
         <activity
             android:name="eliteproxy_biz.SettingsActivity"
             android:parentActivityName="eliteproxy_biz.MainActivity">
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="eliteproxy_biz.MainActivity"></meta-data>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="eliteproxy_biz.MainActivity" />
         </activity>
+
+        <service
+            android:name="com.example.andreyteterevkov.Service.MonitoringService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

@@ -12,21 +12,68 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editApikey"
+        android:hint="@string/editTextApiKey"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:inputType="text" />
+        android:inputType="text"
+        android:layout_marginLeft="@dimen/content_horizontal_margin"
+        android:layout_marginRight="@dimen/content_horizontal_margin" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settingBtn"
         android:id="@+id/settingBtn"
-        android:layout_below="@+id/editText"
-        android:layout_marginTop="72dp"
-        android:layout_alignEnd="@+id/editText"
         android:onClick="saveApiKey"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkBoxNullThead"
+        android:id="@+id/checkBoxErrorCountNull"
+        android:checked="false"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:nestedScrollingEnabled="true"
+        android:layout_marginLeft="16dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkBoxBigThead"
+        android:id="@+id/checkBoxWorningCountBig"
+        android:checked="false"
+        android:layout_below="@+id/checkBoxErrorCountNull"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TitleCheckBox"
+        android:id="@+id/textView"
+        android:paddingLeft="@dimen/content_horizontal_margin"
+        android:textStyle="bold"
+        android:layout_below="@+id/editIp"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editIp"
+        android:hint="@string/TextChengeIP"
+        android:layout_marginLeft="@dimen/content_horizontal_margin"
+        android:layout_marginRight="@dimen/content_horizontal_margin"
+        android:layout_below="@+id/editApikey"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

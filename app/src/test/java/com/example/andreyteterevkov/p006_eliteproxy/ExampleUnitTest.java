@@ -1,4 +1,4 @@
-package com.example.andreyteterevkov.p006_eliteproxy;
+package com.example.andreyteterevkov.Service;
 
 import org.junit.Test;
 

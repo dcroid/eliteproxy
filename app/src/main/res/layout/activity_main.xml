@@ -9,15 +9,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="eliteproxy_biz.MainActivity">
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/upBtn"
         android:id="@+id/btn_update"
         android:onClick="onClickUpBtn"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +30,9 @@
         android:text="@string/ip"
         android:id="@+id/ip"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:paddingLeft="@dimen/content_horizontal_margin"
+        android:paddingTop="@dimen/content_vertical_margin" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,7 +41,9 @@
         android:text=""
         android:id="@+id/ip_result"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/ip" />
+        android:layout_toEndOf="@+id/ip"
+        android:paddingTop="@dimen/content_vertical_margin"
+        android:layout_marginLeft="65dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,7 +52,8 @@
         android:text="@string/expired"
         android:id="@+id/expired"
         android:layout_below="@+id/ip"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:paddingLeft="@dimen/content_vertical_margin" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,7 +62,8 @@
         android:text="@string/expired_result"
         android:id="@+id/expired_result"
         android:layout_alignTop="@+id/expired"
-        android:layout_toEndOf="@+id/expired" />
+        android:layout_toEndOf="@+id/expired"
+        android:paddingLeft="@dimen/content_vertical_margin" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,7 +72,8 @@
         android:text="@string/concnt"
         android:id="@+id/concnt"
         android:layout_below="@+id/expired"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:paddingLeft="@dimen/content_vertical_margin" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,16 +82,20 @@
         android:text="@string/concnt_result"
         android:id="@+id/concnt_result"
         android:layout_alignTop="@+id/concnt"
-        android:layout_toEndOf="@+id/concnt" />
+        android:layout_toEndOf="@+id/concnt"
+        android:paddingLeft="@dimen/content_vertical_margin" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/time_update"
         android:id="@+id/time_update"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        android:layout_below="@+id/concnt"
+        android:layout_alignStart="@+id/concnt"
+        android:layout_alignEnd="@+id/concnt_result"
+        android:paddingLeft="16dp"
+        android:paddingTop="-7dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,7 +104,7 @@
         android:text="@string/time_update_res"
         android:id="@+id/time_update_res"
         android:layout_alignTop="@+id/time_update"
-        android:layout_marginLeft="90dp" />
+        android:layout_marginLeft="100dp" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
@@ -97,8 +112,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
         android:visibility="invisible"
-        android:layout_above="@+id/btn_update"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/time_update"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -107,8 +123,20 @@
         android:text="@string/getActivityBtnSettings"
         android:id="@+id/getActivityBtnSettings"
         android:onClick="onClickSettingsBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:paddingRight="@dimen/content_vertical_margin"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        android:textStyle="bold"
+        android:paddingTop="@dimen/content_vertical_margin"
+        android:paddingLeft="@dimen/content_vertical_margin"
+        android:paddingBottom="@dimen/content_vertical_margin"
+        android:layout_above="@+id/btn_update"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp" />
+
+
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -117,5 +145,22 @@
         android:id="@+id/errorMessage"
         android:layout_alignTop="@+id/progressBar"
         android:layout_centerHorizontal="true" />
+
+
+    <!--<com.jjoe64.graphview.GraphView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:id="@+id/graph"-->
+        <!--android:layout_above="@+id/getActivityBtnSettings"-->
+        <!--android:layout_alignEnd="@+id/getActivityBtnSettings" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="График Онлайн proxy"-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_above="@+id/graph"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
 </RelativeLayout>
