@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.andreyteterevkov.Service.MonitoringService;
+
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -30,18 +32,18 @@ import java.util.Date;
 import Main.R;
 
 import ApiRequest.Api;
+import Var.MyVariable;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    public static String LOG_TAG = "my_log";
+    MyVariable eliteVar = new MyVariable();
 
-    public static final String APP_PREFERENCES = "mysettings";
-    private static final String ApiKey = "apikey";
     SharedPreferences sPref;
     public String key_string;
 
     ProgressBar pb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +88,11 @@ public class MainActivity extends AppCompatActivity {
         new ParseTask().execute();
     }
 
+
     private class ParseTask extends AsyncTask<Void, Void, String> {
 
         String resultJson = "";
+
         // Во время загрузки
         @Override
         protected String doInBackground(Void... params) {
@@ -106,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Начало загрузки
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             super.onPreExecute();
             pb.setVisibility(ProgressBar.VISIBLE);
         }
@@ -119,34 +123,34 @@ public class MainActivity extends AppCompatActivity {
 
             pb.setVisibility(ProgressBar.INVISIBLE);
 
-            Log.d(LOG_TAG, strJson);
+            Log.d(eliteVar.Log(), strJson);
 
             JSONObject dataJsonObj = null;
 
-            try{ // {"ip":"188.117.110.1","expired":"2016-04-14 23:59","concnt":269}
+            try { // {"ip":"188.117.110.1","expired":"2016-04-14 23:59","concnt":269}
                 dataJsonObj = new JSONObject(strJson);
 
                 String ip = dataJsonObj.getString("ip");
                 String expired = dataJsonObj.getString("expired");
                 String concnt = dataJsonObj.getString("concnt");
 
-                TextView ip_resut = (TextView)findViewById(R.id.ip_result);
+                TextView ip_resut = (TextView) findViewById(R.id.ip_result);
                 ip_resut.setText(ip);
 
-                TextView expired_result = (TextView)findViewById(R.id.expired_result);
+                TextView expired_result = (TextView) findViewById(R.id.expired_result);
                 expired_result.setText(expired);
 
-                TextView concnt_result = (TextView)findViewById(R.id.concnt_result);
+                TextView concnt_result = (TextView) findViewById(R.id.concnt_result);
                 concnt_result.setText(concnt);
 
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 String currentDateandTime = sdf.format(new Date());
 
-                TextView time_update_res = (TextView)findViewById(R.id.time_update_res);
+                TextView time_update_res = (TextView) findViewById(R.id.time_update_res);
                 time_update_res.setText(currentDateandTime);
 
-                Log.d(LOG_TAG, ip + " " + expired + " " + concnt);
-            } catch (JSONException e){
+                Log.d(eliteVar.Log(), ip + " " + expired + " " + concnt);
+            } catch (JSONException e) {
                 e.printStackTrace();
                 TextView error = (TextView) findViewById(R.id.errorMessage);
                 error.setText("Произошла ошибка!\nПроверьте API KEY и Интернет");
@@ -157,9 +161,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    void loadApiKey(){
-        sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        key_string = sPref.getString(ApiKey, "no_key");
-        Log.d(LOG_TAG, key_string);
+    void loadApiKey() {
+        sPref = getSharedPreferences(eliteVar.VarApp(),Context.MODE_PRIVATE);
+        key_string = sPref.getString(eliteVar.APP_API_KEY(), "no_key");
+        Log.d(eliteVar.Log(), key_string);
     }
 }

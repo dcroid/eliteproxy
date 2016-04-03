@@ -21,15 +21,12 @@ import Main.R;
 import eliteproxy_biz.MainActivity;
 
 import java.util.concurrent.TimeUnit;
+import Var.MyVariable;
 
 public class MonitoringService extends Service {
-    public static String LOG_TAG = "my_log";
-    public static final String APP_PREFERENCES = "mysettings";
-    private static final String ApiKey = "apikey";
-    private String key_string;
 
-    private static final String nullTh = "nullTh";
-    private static final String manyTh = "manyTh";
+    MyVariable eliteVar = new MyVariable();
+    private String key_string;
 
     SharedPreferences sPref;
 
@@ -46,11 +43,11 @@ public class MonitoringService extends Service {
 
     public void onCreate() {
         super.onCreate();
-        Log.d(LOG_TAG, "onCreate");
+        Log.d(eliteVar.Log(), "onCreate");
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(LOG_TAG, "onStartCommand");
+        Log.d(eliteVar.Log(), "onStartCommand");
         stopSelf();
         someTask();
         return super.onStartCommand(intent, flags, startId);
@@ -59,7 +56,7 @@ public class MonitoringService extends Service {
 
     public void onDestroy() {
         super.onDestroy();
-        Log.d(LOG_TAG, "onDestroy");
+        Log.d(eliteVar.Log(), "onDestroy");
     }
 
 
@@ -68,7 +65,7 @@ public class MonitoringService extends Service {
             public void run() {
                 while (true){
                     loadApiKey();
-                    Log.d(LOG_TAG, "Работаем в сервисе");
+                    Log.d(eliteVar.Log(), "Работаем в сервисе");
                     Boolean vibro = false;
                     Api api = new Api();
                     String data = api.getDataResult(key_string);
@@ -82,10 +79,10 @@ public class MonitoringService extends Service {
                             assert dataJsonObj != null;
                             int concnt = dataJsonObj.getInt("concnt");
 
-                            if(concnt > 299 && loadChecked(manyTh)){
+                            if(concnt > 299 && loadChecked(eliteVar.APP_MANY_TH())){
                                 NotificationMessage("WARNING! Очень много потоков", "Внимание!", "Очень много потоков");
                                 vibro = true;
-                            } else if(concnt == 0 && loadChecked(nullTh)){
+                            } else if(concnt == 0 && loadChecked(eliteVar.APP_NULL_TH())){
                                 NotificationMessage("ERROR!Что-то случилось", "Ошибка!", "Нет ни одного потока");
                                 vibro = true;
                             }
@@ -119,13 +116,13 @@ public class MonitoringService extends Service {
     }
 
     void loadApiKey(){
-        sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        key_string = sPref.getString(ApiKey, "no_key");
-        Log.d(LOG_TAG, sPref.getString(ApiKey, "no_key"));
+        sPref = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
+        key_string = sPref.getString(eliteVar.APP_API_KEY(), "no_key");
+        Log.d(eliteVar.Log(), sPref.getString(eliteVar.APP_API_KEY(), "no_key"));
     }
 
     private boolean loadChecked(String key){
-        SharedPreferences status = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences status = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
         return status.getBoolean(key, false);
     }
 

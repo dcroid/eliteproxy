@@ -15,17 +15,18 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import Var.MyVariable;
 
 
 public class Api {
 
-    public static String LOG_TAG = "my_log";
+    MyVariable eliteVar = new MyVariable();
+
     private String keyString;
     private String ip;
     HttpURLConnection urlConnection = null;
     BufferedReader reader = null;
     String resultJson = "";
-    String apiUrl = "http://eliteproxy.biz/api/access.php?apikey=";
 
     // Во время загрузки
 
@@ -48,8 +49,8 @@ public class Api {
     private String getData (){
     // получаем данные с внешнего ресурса
         try {
-            Log.d(LOG_TAG, "LOG API: " + apiUrl + getKey());
-            URL url = new URL(apiUrl + getKey());
+            Log.d(eliteVar.Log(), "LOG API: " + eliteVar.API_URL_ACCESS() + getKey());
+            URL url = new URL(eliteVar.API_URL_ACCESS() + getKey());
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
@@ -66,7 +67,7 @@ public class Api {
             }
 
             resultJson = buffer.toString();
-            Log.d(LOG_TAG, "LOG API: " + resultJson);
+            Log.d(eliteVar.Log(), "LOG API: " + resultJson);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,8 +79,8 @@ public class Api {
         try{
             // http://eliteproxy.biz/api/access.php?apikey=&ip=
 
-            Log.d(LOG_TAG, "LOG API: changeIp -> " +apiUrl + getKey() + "&ip=" + getIp());
-            URL url = new URL(apiUrl + getKey() + "&ip=" + getIp());
+            Log.d(eliteVar.Log(), "LOG API: changeIp -> " + eliteVar.API_URL_ACCESS() + getKey() + "&ip=" + getIp());
+            URL url = new URL(eliteVar.API_URL_ACCESS() + getKey() + "&ip=" + getIp());
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
@@ -96,7 +97,7 @@ public class Api {
             }
 
             resultJson = buffer.toString();
-            Log.d(LOG_TAG, "LOG API: changeIp --> " + resultJson);
+            Log.d(eliteVar.Log(), "LOG API: changeIp --> " + resultJson);
 
         }catch (Exception e){
             e.printStackTrace();

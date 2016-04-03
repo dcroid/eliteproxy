@@ -12,15 +12,14 @@ import android.widget.Toast;
 
 import Main.R;
 import ApiRequest.Api;
+import Var.MyVariable;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    public static String LOG_TAG = "my_log";
-    public static final String APP_PREFERENCES = "mysettings";
-    private static final String ApiKey = "apikey";
+    MyVariable eliteVar = new MyVariable();
+
     private static final String Ip = "ip";
-    private static final String nullTh = "nullTh";
-    private static final String manyTh = "manyTh";
+
     SharedPreferences sPref;
     EditText editApikey;
     EditText editIp;
@@ -74,29 +73,29 @@ public class SettingsActivity extends AppCompatActivity {
 
         String resultChangeIp = new Api().getResultChangeIp(loadApiKey, loadIp);
 
-        Log.d(LOG_TAG, "LOG API: Result Change IP " + resultChangeIp);
+        Log.d(eliteVar.Log(), "LOG API: Result Change IP " + resultChangeIp);
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
 
     void saveApikey(){
-        sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        sPref = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
-        ed.putString(ApiKey, editApikey.getText().toString());
+        ed.putString(eliteVar.APP_API_KEY(), editApikey.getText().toString());
         ed.commit();
         //Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
 
     void loadApikey(){
-        sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        loadApiKey = sPref.getString(ApiKey, "");
+        sPref = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
+        loadApiKey = sPref.getString(eliteVar.APP_API_KEY(), "");
         editApikey.setText(loadApiKey);
     }
 
 
     void SaveIP(){
-        sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        sPref = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(Ip, editIp.getText().toString());
         ed.commit();
@@ -104,14 +103,14 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     void loadIp(){
-        sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        sPref = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
         loadIp = sPref.getString(Ip, "");
         editIp.setText(loadIp);
     }
 
     void loadCheckedNullTh(){
-        SharedPreferences status = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        if(status.getBoolean(nullTh, false)){
+        SharedPreferences status = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
+        if(status.getBoolean(eliteVar.APP_NULL_TH(), false)){
             NullThead.setChecked(true);
         } else {
             NullThead.setChecked(false);
@@ -119,16 +118,16 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     void saveNullTh(Boolean status){
-        SharedPreferences s = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences s = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = s.edit();
-        ed.putBoolean(nullTh, status);
+        ed.putBoolean(eliteVar.APP_NULL_TH(), status);
         ed.apply();
     }
 
 
     void loadCheckedManyTh(){
-        SharedPreferences status = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        if(status.getBoolean(manyTh, false)){
+        SharedPreferences status = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
+        if(status.getBoolean(eliteVar.APP_MANY_TH(), false)){
             ManyThead.setChecked(true);
         } else {
             ManyThead.setChecked(false);
@@ -136,9 +135,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     void saveManyTh(Boolean status){
-        SharedPreferences s = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences s = getSharedPreferences(eliteVar.VarApp(), Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = s.edit();
-        ed.putBoolean(manyTh, status);
+        ed.putBoolean(eliteVar.APP_MANY_TH(), status);
         ed.apply();
     }
 }
